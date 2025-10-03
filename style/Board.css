@@ -1,0 +1,507 @@
+/* ---------------- Base Colors ---------------- */
+:root {
+  --bg: #0e1720;
+  --card: #0e1720;
+  --accent: #fcb852;
+  --muted: #c5c6c7;
+  --success: #28a745;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #17a2b8;
+}
+
+/* ---------------- Global ---------------- */
+body {
+  background-color: var(--bg);
+  font-family: "Poppins", sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------- Navbar ---------------- */
+.navbar {
+  background: var(--card);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.navbar .nav-link {
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.navbar .nav-link:hover {
+  color: var(--accent);
+}
+.navbar .brand {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* ---------------- Match Info Bar ---------------- */
+.match-info-bar {
+  background: linear-gradient(135deg, rgba(252, 184, 82, 0.1), rgba(252, 184, 82, 0.05));
+  border-bottom: 1px solid rgba(252, 184, 82, 0.3);
+  padding: 0.75rem 0;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team-logo-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+.match-status {
+  background: var(--accent);
+  color: #0b0c10;
+  padding: 0.25rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.quick-stats {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------------- Buttons ---------------- */
+.btn-primary-acc {
+  background-color: var(--accent);
+  border: none;
+  color: #0b0c10;
+  font-weight: 600;
+}
+.btn-primary-acc:hover {
+  background-color: #45e4d7;
+  color: #0b0c10;
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  border: none;
+  color: #0b0c10;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-accent:hover {
+  background-color: #45e4d7;
+  color: #0b0c10;
+  transform: translateY(-2px);
+}
+
+/* ---------------- Cards ---------------- */
+.selection-card,
+.score-display,
+.player-card,
+.scoring-panel,
+.match-summary-card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.selection-card:hover,
+.score-display:hover,
+.player-card:hover,
+.scoring-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------------- Team Score Display ---------------- */
+.team-score-card {
+  background: rgba(252, 184, 82, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid rgba(252, 184, 82, 0.3);
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.team-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+.team-details h4 {
+  color: var(--accent);
+  margin: 0;
+  font-weight: 700;
+}
+
+.team-status {
+  background: var(--accent);
+  color: #0b0c10;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.score-stats {
+  text-align: center;
+}
+
+.main-score {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.over-info {
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+/* ---------------- Stats Grid ---------------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* ---------------- Player Card ---------------- */
+.player-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.player-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+}
+
+.player-info h5 {
+  color: var(--accent);
+  margin: 0;
+  font-weight: 600;
+}
+
+.player-info span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.player-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.player-stat {
+  text-align: center;
+  flex: 1;
+}
+
+.player-stat .stat-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.player-stat .stat-value {
+  display: block;
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* ---------------- Scoring Panel ---------------- */
+.scoring-panel {
+  height: fit-content;
+}
+
+.score-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.score-btn {
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.score-btn:hover {
+  background: var(--accent);
+  color: #0b0c10;
+  border-color: var(--accent);
+  transform: scale(1.05);
+}
+
+.score-four {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.score-four:hover {
+  background: var(--success);
+  color: white;
+}
+
+.score-six {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.score-six:hover {
+  background: #ff6b6b;
+  color: white;
+}
+
+.special-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.special-buttons .btn {
+  flex: 1;
+  font-size: 0.8rem;
+}
+
+/* ---------------- Form Controls ---------------- */
+.form-select {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 8px;
+}
+
+.form-select:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(252, 184, 82, 0.25);
+  color: white;
+}
+
+.form-select option {
+  background-color: var(--card);
+  color: white;
+}
+
+/* ---------------- Match Summary ---------------- */
+.match-summary-card {
+  text-align: center;
+}
+
+.team-final-score {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.team-name {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.final-score {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: white;
+}
+
+.match-result {
+  background: rgba(252, 184, 82, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid rgba(252, 184, 82, 0.3);
+}
+
+/* ---------------- Modal Styling ---------------- */
+.modal-content {
+  background-color: var(--card);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-close {
+  filter: invert(1);
+}
+
+.player-final-stats {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+/* ---------------- Responsive Design ---------------- */
+@media (max-width: 768px) {
+  .team-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .player-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .player-stats {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .player-stat {
+    min-width: 60px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  
+  .score-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .special-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .main-score {
+    font-size: 2rem;
+  }
+  
+  .match-info-bar .row > div {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .quick-stats {
+    font-size: 0.9rem;
+  }
+}
+
+/* ---------------- Animations ---------------- */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.score-update {
+  animation: scoreFlash 0.6s ease-out;
+}
+
+@keyframes scoreFlash {
+  0% {
+    background-color: var(--accent);
+    transform: scale(1.1);
+  }
+  100% {
+    background-color: transparent;
+    transform: scale(1);
+  }
+}
+
+/* ---------------- Button States ---------------- */
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  transform: none;
+}
+
+/* ---------------- Highlight Classes ---------------- */
+.highlight-runs {
+  background-color: rgba(40, 167, 69, 0.2);
+  border-color: var(--success);
+}
+
+.highlight-boundary {
+  background-color: rgba(255, 193, 7, 0.2);
+  border-color: var(--warning);
+}
+
+.highlight-six {
+  background-color: rgba(255, 107, 107, 0.2);
+  border-color: #ff6b6b;
+}

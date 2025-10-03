@@ -1,0 +1,442 @@
+/* ---------------- Base Colors ---------------- */
+:root {
+  --bg: #0e1720;
+  --card: #0e1720;
+  --accent: #fcb852;
+  --muted: #c5c6c7;
+}
+
+/* ---------------- Global ---------------- */
+body {
+  background-color: var(--bg);
+  font-family: "Poppins", sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------- Navbar ---------------- */
+.navbar {
+  background: var(--card);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.navbar .nav-link {
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.navbar .nav-link:hover {
+  color: var(--accent);
+}
+.navbar .brand {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* ---------------- Buttons ---------------- */
+.btn-primary-acc {
+  background-color: var(--accent);
+  border: none;
+  color: #0b0c10;
+  font-weight: 600;
+}
+.btn-primary-acc:hover {
+  background-color: #45e4d7;
+  color: #0b0c10;
+}
+.btn-secondary {
+  background-color: #c5c6c7;
+  border: none;
+  color: #0b0c10;
+  font-weight: 600;
+}
+.btn-secondary:hover {
+  background-color: #a0a1a2;
+  color: #0b0c10;
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  border: none;
+  color: #0b0c10;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-accent:hover {
+  background-color: #45e4d7;
+  color: #0b0c10;
+  transform: translateY(-2px);
+}
+
+.btn-outline-accent {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-outline-accent:hover,
+.btn-outline-accent:focus,
+.btn-outline-accent.active {
+  background-color: var(--accent);
+  color: #0b0c10;
+  border-color: var(--accent);
+}
+
+/* ---------------- Team Cards ---------------- */
+.team-card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+}
+
+.team-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.team-card-header {
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.team-card-header h5 {
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+
+.team-card-body {
+  padding: 1.5rem;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent);
+}
+
+.team-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  flex-shrink: 0;
+}
+
+.team-details {
+  flex-grow: 1;
+}
+
+.team-name {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.team-captain,
+.team-players {
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+/* ---------------- Form Controls ---------------- */
+.form-select {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 8px;
+}
+
+.form-select:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(252, 184, 82, 0.25);
+  color: white;
+}
+
+.form-select option {
+  background-color: var(--card);
+  color: white;
+}
+
+/* ---------------- Toss Section ---------------- */
+.toss-card {
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+}
+
+.toss-options {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+/* ---------------- Coin Animation ---------------- */
+.coin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  perspective: 1000px;
+}
+
+.coin {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s;
+}
+
+.coin.flipping {
+  animation: coinFlip 2s ease-in-out;
+}
+
+@keyframes coinFlip {
+  0% {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+  25% {
+    transform: rotateY(900deg) rotateX(180deg);
+  }
+  50% {
+    transform: rotateY(1800deg) rotateX(360deg);
+  }
+  75% {
+    transform: rotateY(2700deg) rotateX(540deg);
+  }
+  100% {
+    transform: rotateY(3600deg) rotateX(720deg);
+  }
+}
+
+.coin-side {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: bold;
+  border: 4px solid var(--accent);
+  backface-visibility: hidden;
+}
+
+.coin-heads {
+  background: linear-gradient(135deg, var(--accent), #ffd700);
+  color: #0b0c10;
+  transform: rotateY(0deg);
+}
+
+.coin-tails {
+  background: linear-gradient(135deg, #c5c6c7, #a0a1a2);
+  color: #0b0c10;
+  transform: rotateY(180deg);
+}
+
+/* ---------------- Toss Result ---------------- */
+.toss-result {
+  background: rgba(252, 184, 82, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid rgba(252, 184, 82, 0.3);
+}
+
+.toss-result-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #0b0c10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto;
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.match-order {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.team-badge {
+  background: var(--accent);
+  color: #0b0c10;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* ---------------- Button States ---------------- */
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-check:checked + .btn {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #0b0c10;
+}
+
+/* ---------------- Responsive Design ---------------- */
+@media (max-width: 768px) {
+  .toss-card {
+    padding: 1.5rem;
+  }
+  
+  .coin {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .coin-side {
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
+  }
+  
+  .coin-container {
+    height: 150px;
+  }
+  
+  .team-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .team-logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .toss-options {
+    padding: 1rem;
+  }
+  
+  .match-order {
+    padding: 0.75rem;
+  }
+  
+  .team-badge {
+    min-width: 100px;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* ---------------- Animation Classes ---------------- */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------------- Coin Result Classes ---------------- */
+.coin.show-heads {
+  transform: rotateY(0deg);
+}
+
+.coin.show-tails {
+  transform: rotateY(180deg);
+}
+
+/* ---------------- Loading States ---------------- */
+.coin.flipping .coin-heads,
+.coin.flipping .coin-tails {
+  animation: coinGlow 2s ease-in-out;
+}
+
+@keyframes coinGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(252, 184, 82, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(252, 184, 82, 0.8), 0 0 30px rgba(252, 184, 82, 0.4);
+  }
+}
+
+/* ---------------- Section Transitions ---------------- */
+#tossSection,
+#nextButtonSection {
+  transition: all 0.5s ease-in-out;
+}
+
+/* ---------------- Status Indicators ---------------- */
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.status-ready {
+  background-color: #28a745;
+}
+
+.status-pending {
+  background-color: #ffc107;
+}
+
+.status-error {
+  background-color: #dc3545;
+}

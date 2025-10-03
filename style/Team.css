@@ -1,0 +1,182 @@
+/* ---------------- Base Colors ---------------- */
+:root {
+  --bg: #0e1720;;
+  --card:#0e1720;
+  --accent: #fcb852;
+  --muted: #c5c6c7;
+}
+
+/* ---------------- Global ---------------- */
+body {
+  background-color: var(--bg);
+  font-family: "Poppins", sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------------- Navbar ---------------- */
+.navbar {
+  background: var(--card);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.navbar .nav-link {
+  color: var(--muted);
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+.navbar .nav-link:hover {
+  color: var(--accent);
+}
+.navbar .brand {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+/* ---------------- Buttons ---------------- */
+.btn-primary-acc {
+  background-color: var(--accent);
+  border: none;
+  color: #0b0c10;
+  font-weight: 600;
+}
+.btn-primary-acc:hover {
+  background-color: #45e4d7;
+  color: #0b0c10;
+}
+.btn-secondary {
+  background-color: #c5c6c7;
+  border: none;
+  color: #0b0c10;
+  font-weight: 600;
+}
+.btn-secondary:hover {
+  background-color: #a0a1a2;
+  color: #0b0c10;
+}
+
+/* ---------------- Team Cards ---------------- */
+.card {
+  background: var(--card);
+  color: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+.card-title {
+  font-weight: 600;
+  color: var(--accent);
+}
+.card-text {
+  color: var(--muted);
+}
+.team-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+#addTeamBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--accent);
+  color: #0b0c10;
+  font-size: 24px;
+  font-weight: bold;
+  width: 55px;
+  height: 55px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease;
+}
+#addTeamBtn:hover {
+  background: #45e4d7;
+  transform: scale(1.1);
+}
+
+/* Card overrides */
+.card {
+  background-color: var(--card) !important; /* dark background */
+  color: #ffffff; /* default text color inside card */
+}
+
+.card .card-title {
+  color: var(--accent) !important; /* bright yellow for team name */
+  font-weight: 600;
+}
+
+.card .card-text {
+  color: #c5c6c7 !important; /* muted gray for captain & description */
+}
+
+/* ---------------- Modal Styling ---------------- */
+/* Style the modal to match your dark theme */
+.modal-content {
+  background-color: var(--card);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Style form labels */
+.modal-body .form-label {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Style form inputs */
+.modal-body .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.modal-body .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(252, 184, 82, 0.25);
+  color: white;
+}
+
+/* Style placeholder text */
+.modal-body .form-control::placeholder {
+  color: var(--muted);
+}
+
+/* Style the close button */
+.btn-close {
+  filter: invert(1);
+}
+
+/* Style file input specifically */
+.modal-body input[type="file"] {
+  color: var(--muted);
+}
+
+.modal-body input[type="file"]::-webkit-file-upload-button {
+  background-color: var(--accent);
+  color: #0b0c10;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
