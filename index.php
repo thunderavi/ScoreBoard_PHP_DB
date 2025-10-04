@@ -3,7 +3,7 @@
 session_start();
 
 // Page configuration
-$page_title = "Live Cricket Scoreboard — Landing";
+$page_title = "Live Cricket Scoreboard – Landing";
 $brand_name = "🏏 ScoreBoard";
 
 // Check if user is logged in
@@ -11,10 +11,12 @@ $is_logged_in = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'
 $user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '';
 $user_email = isset($_SESSION['user_email']) ? $_SESSION['user_email'] : '';
 
-// Handle logout
+// Handle logout - CLEAR BOTH SESSION AND LOCALSTORAGE
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_unset();
     session_destroy();
+    // Set a flag to clear localStorage
+    setcookie('clear_storage', '1', time() + 5, '/');
     header('Location: index.php');
     exit;
 }
@@ -184,7 +186,7 @@ $features = [
 
           <div class="h-title">Live Cricket Match Scoreboard</div>
           <div class="h-sub">
-            Futuristic, real-time scoreboard system — update runs, wickets & overs dynamically, highlight milestones,
+            Futuristic, real-time scoreboard system – update runs, wickets & overs dynamically, highlight milestones,
             and get a simple win-probability estimate. Designed for scorers, coaches, and fans.
           </div>
 
@@ -268,12 +270,32 @@ $features = [
     userEmail: <?php echo json_encode($user_email); ?>
   };
 
+  // Check if we need to clear localStorage (after logout)
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
   // Sync localStorage with PHP session on page load
   document.addEventListener("DOMContentLoaded", function() {
+    // Check for logout flag
+    if (getCookie('clear_storage') === '1') {
+      // Clear localStorage
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userEmail");
+      // Clear the cookie
+      document.cookie = "clear_storage=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      console.log("Logout: localStorage cleared");
+      return; // Don't sync anything
+    }
+
     const localLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     const phpLoggedIn = window.phpSession.isLoggedIn;
     
-    // If localStorage says logged in but PHP session doesn't, sync it
+    // Only sync if localStorage says logged in AND PHP session doesn't
+    // This prevents re-login after logout
     if (localLoggedIn && !phpLoggedIn) {
       fetch('index.php', {
         method: 'POST',
@@ -294,13 +316,12 @@ $features = [
       }
     }
     
-    // Debug: Log navigation links on click
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        console.log('Navigating to:', this.href);
-        console.log('Link text:', this.textContent.trim());
-      });
-    });
+    // If neither is logged in, make sure localStorage is clear
+    if (!phpLoggedIn && !localLoggedIn) {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userEmail");
+    }
   });
   </script>
 </body>

@@ -13,7 +13,7 @@ $db = $database->getConnection();
 
 // Check if user is logged in
 $is_logged_in = isset($_SESSION['user_logged_in']) && $_SESSION['user_logged_in'] === true;
-$user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : '';
+$user_name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Player';
 
 // Redirect to login if not logged in
 if (!$is_logged_in) {
@@ -66,8 +66,7 @@ $nav_items = [
 ];
 $cta_button = [
     'text' => 'Logout',
-    'href' => 'Dash.php?action=logout',
-    'class' => 'btn-secondary'
+    'href' => 'Dash.php?action=logout'
 ];
 ?>
 <!DOCTYPE html>
@@ -85,7 +84,6 @@ $cta_button = [
 
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style/dash.css">
 
   <style>
     body {
@@ -95,35 +93,75 @@ $cta_button = [
       margin: 0;
       padding: 0;
     }
+    /* Navbar */
+    .navbar {
+      background: #0b0f19;
+      border-bottom: 1px solid rgba(252, 184, 82, 0.3);
+    }
+    .navbar-brand {
+      color: #fcb852 !important;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .nav-link {
+      color: white !important;
+      transition: 0.3s;
+    }
+    .nav-link:hover {
+      color: #fcb852 !important;
+    }
+
+    /* Stats Card */
     .stats-card {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 15px;
       padding: 25px;
       margin-bottom: 20px;
       border: 1px solid rgba(252, 184, 82, 0.2);
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 0 0 rgba(252,184,82,0);
+    }
+    .stats-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 0 20px rgba(252,184,82,0.4);
+      border-color: #fcb852;
     }
     .stats-card h3 {
       color: #fcb852;
       font-size: 2.5rem;
       margin-bottom: 10px;
     }
+
+    /* Match Card */
     .match-card {
       background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
       padding: 15px;
       margin-bottom: 15px;
       border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease-in-out;
     }
     .match-card:hover {
       background: rgba(255, 255, 255, 0.08);
       border-color: #fcb852;
+      transform: scale(1.01);
+    }
+
+    /* Quick Actions */
+    .quick-action {
+      transition: 0.3s;
+    }
+    .quick-action:hover {
+      background: #fcb852 !important;
+      color: #0b0f19 !important;
+      transform: translateY(-3px) scale(1.03);
     }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="../index.php"><?php echo $brand_name; ?></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks">
@@ -133,16 +171,15 @@ $cta_button = [
         <ul class="navbar-nav ms-auto align-items-center me-3">
           <?php foreach ($nav_items as $item): ?>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo htmlspecialchars($item['href']); ?>">
+              <a class="nav-link px-3" href="<?php echo htmlspecialchars($item['href']); ?>">
                 <?php echo htmlspecialchars($item['text']); ?>
               </a>
             </li>
           <?php endforeach; ?>
         </ul>
         <div class="d-flex">
-          <a class="btn btn-sm <?php echo htmlspecialchars($cta_button['class']); ?>" 
-             href="<?php echo htmlspecialchars($cta_button['href']); ?>" 
-             style="min-width:110px">
+          <a class="btn btn-outline-warning btn-sm px-4 fw-bold" 
+             href="<?php echo htmlspecialchars($cta_button['href']); ?>">
             <?php echo htmlspecialchars($cta_button['text']); ?>
           </a>
         </div>
@@ -186,6 +223,40 @@ $cta_button = [
         </div>
       </div>
     </div>
+     <!-- Quick Actions -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <h4 style="color: #fcb852; font-weight: 600;" class="mb-3">
+          <i class="fas fa-bolt me-2"></i>Quick Actions
+        </h4>
+        <div class="row">
+          <div class="col-md-3 mb-3">
+            <a href="Team.php" class="btn btn-outline-light w-100 py-3 quick-action">
+              <i class="fas fa-users d-block mb-2" style="font-size: 2rem;"></i>
+              Manage Teams
+            </a>
+          </div>
+          <div class="col-md-3 mb-3">
+            <a href="Match.php" class="btn btn-outline-light w-100 py-3 quick-action">
+              <i class="fas fa-plus-circle d-block mb-2" style="font-size: 2rem;"></i>
+              New Match
+            </a>
+          </div>
+          <div class="col-md-3 mb-3">
+            <a href="TeamForm.php" class="btn btn-outline-light w-100 py-3 quick-action">
+              <i class="fas fa-user-plus d-block mb-2" style="font-size: 2rem;"></i>
+              Add Players
+            </a>
+          </div>
+          <div class="col-md-3 mb-3">
+            <a href="Board.php" class="btn btn-outline-light w-100 py-3 quick-action">
+              <i class="fas fa-chart-line d-block mb-2" style="font-size: 2rem;"></i>
+              Live Score
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Recent Matches -->
     <div class="row">
@@ -206,7 +277,7 @@ $cta_button = [
               <div class="row align-items-center">
                 <div class="col-md-4">
                   <div class="d-flex align-items-center">
-                    <img src="<?php echo htmlspecialchars($match['team1_logo']); ?>" 
+                    <img src="<?php echo htmlspecialchars($match['team1_logo'] ?? '../assets/default-logo.png'); ?>" 
                          alt="Team 1" 
                          style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
                     <span><?php echo htmlspecialchars($match['team1_name']); ?></span>
@@ -217,7 +288,7 @@ $cta_button = [
                 </div>
                 <div class="col-md-4">
                   <div class="d-flex align-items-center">
-                    <img src="<?php echo htmlspecialchars($match['team2_logo']); ?>" 
+                    <img src="<?php echo htmlspecialchars($match['team2_logo'] ?? '../assets/default-logo.png'); ?>" 
                          alt="Team 2" 
                          style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
                     <span><?php echo htmlspecialchars($match['team2_name']); ?></span>
@@ -239,44 +310,10 @@ $cta_button = [
       </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="row mt-5">
-      <div class="col-12">
-        <h4 style="color: #fcb852; font-weight: 600;" class="mb-3">
-          <i class="fas fa-bolt me-2"></i>Quick Actions
-        </h4>
-        <div class="row">
-          <div class="col-md-3 mb-3">
-            <a href="Team.php" class="btn btn-outline-light w-100 py-3">
-              <i class="fas fa-users d-block mb-2" style="font-size: 2rem;"></i>
-              Manage Teams
-            </a>
-          </div>
-          <div class="col-md-3 mb-3">
-            <a href="Match.php" class="btn btn-outline-light w-100 py-3">
-              <i class="fas fa-plus-circle d-block mb-2" style="font-size: 2rem;"></i>
-              New Match
-            </a>
-          </div>
-          <div class="col-md-3 mb-3">
-            <a href="TeamForm.php" class="btn btn-outline-light w-100 py-3">
-              <i class="fas fa-user-plus d-block mb-2" style="font-size: 2rem;"></i>
-              Add Players
-            </a>
-          </div>
-          <div class="col-md-3 mb-3">
-            <a href="Board.php" class="btn btn-outline-light w-100 py-3">
-              <i class="fas fa-chart-line d-block mb-2" style="font-size: 2rem;"></i>
-              Live Score
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+   
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

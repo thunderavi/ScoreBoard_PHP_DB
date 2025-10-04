@@ -124,6 +124,7 @@ if ($is_logged_in) {
     $nav_items = [
         ['text' => 'Home', 'href' => '../index.php'],
         ['text' => 'Teams', 'href' => 'Team.php'],
+        ['text' => 'Match', 'href' => 'Match.php'],
         ['text' => 'Dashboard', 'href' => 'Dash.php']
     ];
     $cta_button = [
