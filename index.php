@@ -44,10 +44,9 @@ if ($is_logged_in) {
         'class' => 'btn-secondary'
     ];
 } else {
+    // Only show Home and Login when logged out
     $nav_items = [
         ['text' => 'Home', 'href' => 'index.php', 'active' => true],
-        ['text' => 'Teams', 'href' => 'Pages/Team.php', 'active' => false],
-        ['text' => 'Match', 'href' => 'Pages/Match.php', 'active' => false],
         ['text' => 'Login', 'href' => 'Pages/SignUp.php', 'active' => false]
     ];
     $cta_button = [
@@ -114,9 +113,79 @@ $features = [
       height: 2px;
       background: var(--accent, #00d9ff);
     }
+
+    /* Disabled link style */
+    .nav-link.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Login prompt overlay */
+    .login-prompt {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(7, 16, 25, 0.98);
+      border: 2px solid var(--accent, #00d9ff);
+      border-radius: 16px;
+      padding: 30px;
+      z-index: 9999;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3);
+      display: none;
+    }
+
+    .login-prompt.show {
+      display: block;
+      animation: fadeInScale 0.3s ease;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .overlay-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9998;
+      display: none;
+    }
+
+    .overlay-backdrop.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Login Prompt Overlay -->
+  <div class="overlay-backdrop" id="overlayBackdrop"></div>
+  <div class="login-prompt" id="loginPrompt">
+    <h5 style="color: var(--accent); margin-bottom: 15px;">
+      <i class="fas fa-lock"></i> Login Required
+    </h5>
+    <p style="color: var(--muted); margin-bottom: 20px;">
+      Please login or sign up to access this feature.
+    </p>
+    <div class="d-flex gap-2">
+      <a href="Pages/SignUp.php" class="btn btn-primary-acc flex-grow-1">Login / Sign Up</a>
+      <button class="btn btn-ghost" onclick="closeLoginPrompt()">Cancel</button>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav class="navbar navbar-expand-lg">
@@ -205,8 +274,13 @@ $features = [
           </div>
 
           <div class="cta-row">
-            <a class="btn btn-primary-acc" href="#demo" role="button">Start Demo</a>
-            <a class="btn btn-ghost" href="#features" role="button">Explore Features</a>
+            <?php if ($is_logged_in): ?>
+              <a class="btn btn-primary-acc" href="Pages/Dash.php" role="button">Go to Dashboard</a>
+              <a class="btn btn-ghost" href="Pages/Team.php" role="button">View Teams</a>
+            <?php else: ?>
+              <a class="btn btn-primary-acc" href="Pages/SignUp.php" role="button">Sign Up Now</a>
+              <a class="btn btn-ghost" href="#features" role="button">Learn More</a>
+            <?php endif; ?>
           </div>
 
           <div class="demo-card">
@@ -269,6 +343,20 @@ $features = [
     userName: <?php echo json_encode($user_name); ?>,
     userEmail: <?php echo json_encode($user_email); ?>
   };
+
+  // Login prompt functions
+  function showLoginPrompt() {
+    document.getElementById('loginPrompt').classList.add('show');
+    document.getElementById('overlayBackdrop').classList.add('show');
+  }
+
+  function closeLoginPrompt() {
+    document.getElementById('loginPrompt').classList.remove('show');
+    document.getElementById('overlayBackdrop').classList.remove('show');
+  }
+
+  // Close on backdrop click
+  document.getElementById('overlayBackdrop').addEventListener('click', closeLoginPrompt);
 
   // Check if we need to clear localStorage (after logout)
   function getCookie(name) {

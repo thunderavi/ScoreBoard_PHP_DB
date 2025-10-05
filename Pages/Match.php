@@ -2,6 +2,9 @@
 // Start session
 session_start();
 
+
+require_once __DIR__ . '/auth_check.php';
+
 // Page configuration
 $page_title = "Match Setup – Live Cricket Scoreboard";
 $brand_name = "🏏 ScoreBoard";

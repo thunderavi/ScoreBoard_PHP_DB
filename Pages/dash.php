@@ -2,6 +2,8 @@
 // Start session
 session_start();
 
+require_once __DIR__ . '/auth_check.php';
+
 require_once __DIR__ . '/../config/database.php';
 
 // Page configuration
@@ -258,57 +260,59 @@ $cta_button = [
       </div>
     </div>
 
-    <!-- Recent Matches -->
-    <div class="row">
-      <div class="col-12">
-        <h4 style="color: #fcb852; font-weight: 600;" class="mb-3">
-          <i class="fas fa-history me-2"></i>Recent Matches
-        </h4>
-        
-        <?php if (empty($recent_matches)): ?>
-          <div class="text-center py-5">
-            <i class="fas fa-cricket fa-3x text-muted mb-3"></i>
-            <p class="text-muted">No matches played yet</p>
-            <a href="Match.php" class="btn btn-primary">Start Your First Match</a>
-          </div>
-        <?php else: ?>
-          <?php foreach ($recent_matches as $match): ?>
-            <div class="match-card">
-              <div class="row align-items-center">
-                <div class="col-md-4">
-                  <div class="d-flex align-items-center">
-                    <img src="<?php echo htmlspecialchars($match['team1_logo'] ?? '../assets/default-logo.png'); ?>" 
-                         alt="Team 1" 
-                         style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                    <span><?php echo htmlspecialchars($match['team1_name']); ?></span>
-                  </div>
-                </div>
-                <div class="col-md-1 text-center">
-                  <strong style="color: #fcb852;">VS</strong>
-                </div>
-                <div class="col-md-4">
-                  <div class="d-flex align-items-center">
-                    <img src="<?php echo htmlspecialchars($match['team2_logo'] ?? '../assets/default-logo.png'); ?>" 
-                         alt="Team 2" 
-                         style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                    <span><?php echo htmlspecialchars($match['team2_name']); ?></span>
-                  </div>
-                </div>
-                <div class="col-md-3 text-end">
-                  <span class="badge <?php echo $match['status'] === 'completed' ? 'bg-success' : 'bg-warning'; ?>">
-                    <?php echo ucfirst($match['status']); ?>
-                  </span>
-                  <br>
-                  <small class="text-muted">
-                    <?php echo date('M d, Y', strtotime($match['created_at'])); ?>
-                  </small>
+   <!-- Recent Matches Section - Replace in your dash.php -->
+<div class="row">
+  <div class="col-12">
+    <h4 style="color: #fcb852; font-weight: 600;" class="mb-3">
+      <i class="fas fa-history me-2"></i>Recent Matches
+    </h4>
+    
+    <?php if (empty($recent_matches)): ?>
+      <div class="text-center py-5">
+        <i class="fas fa-cricket fa-3x text-muted mb-3"></i>
+        <p class="text-muted">No matches played yet</p>
+        <a href="Match.php" class="btn btn-primary">Start Your First Match</a>
+      </div>
+    <?php else: ?>
+      <?php foreach ($recent_matches as $match): ?>
+        <a href="MatchDetails.php?id=<?php echo $match['id']; ?>" style="text-decoration: none; color: inherit;">
+          <div class="match-card">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <img src="<?php echo htmlspecialchars($match['team1_logo'] ?? '../assets/default-logo.png'); ?>" 
+                       alt="Team 1" 
+                       style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                  <span><?php echo htmlspecialchars($match['team1_name']); ?></span>
                 </div>
               </div>
+              <div class="col-md-1 text-center">
+                <strong style="color: #fcb852;">VS</strong>
+              </div>
+              <div class="col-md-4">
+                <div class="d-flex align-items-center">
+                  <img src="<?php echo htmlspecialchars($match['team2_logo'] ?? '../assets/default-logo.png'); ?>" 
+                       alt="Team 2" 
+                       style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                  <span><?php echo htmlspecialchars($match['team2_name']); ?></span>
+                </div>
+              </div>
+              <div class="col-md-3 text-end">
+                <span class="badge <?php echo $match['status'] === 'completed' ? 'bg-success' : 'bg-warning'; ?>">
+                  <?php echo ucfirst($match['status']); ?>
+                </span>
+                <br>
+                <small class="text-muted">
+                  <?php echo date('M d, Y', strtotime($match['created_at'])); ?>
+                </small>
+              </div>
             </div>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </div>
-    </div>
+          </div>
+        </a>
+      <?php endforeach; ?>
+    <?php endif; ?>
+  </div>
+</div>
 
    
   </div>

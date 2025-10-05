@@ -1,6 +1,9 @@
 <?php
 // Start session
 session_start();
+
+require_once __DIR__ . '/auth_check.php';
+
 require_once __DIR__ . '/../config/database.php';
 
 // Page configuration

@@ -3,6 +3,7 @@
 session_start();
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/auth_check.php';
 
 $database = new Database();
 $db = $database->getConnection();
